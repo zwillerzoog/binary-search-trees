@@ -58,13 +58,13 @@ class BinaryTree {
         successcor.remove(successcor.key);
       }
       else if (this.left) {
-          this.left._replaceWith();
+          this._replaceWith(this.left);
       }
       else if (this.right) {
-          this.right._replaceWith();
+          this._replaceWith(this.right);
       }
       else {
-          _replaceWith = null; 
+          this._replaceWith (null)
       }
     }
     else if (key < this.key && this.left) {
@@ -77,6 +77,42 @@ class BinaryTree {
       throw new Error('Key Error');
     }
   }
+
+  _replaceWith(node) {
+    if (this.parent) {
+        if (this == this.parent.left) {     //need help understanding where each node goes
+            this.parent.left = node;
+        } else if (this == this.parent.right) {
+            this.parent.right = node; 
+        }
+
+        if (node) {
+            this.parent = node.parent;
+        }
+    }
+    else {
+        if (node) {
+            this.key = node.key;
+            this.value = node.value;
+            this.left = node.left;
+            this.right = node.right;
+        } else {
+            this.key = null;
+            this.value = null;
+            this.left = null;
+            this.right = null;
+        }
+    }
+  }
+
+  _findMin(key) {
+      if (!this.left) {
+          return this;
+      } else {
+          return this.left._findMin()
+      }
+  }
+
 }
 
 let tree = new BinaryTree();
@@ -85,5 +121,9 @@ tree.insert(3, 'treees');
 tree.insert(4, 'four!');
 tree.insert(7, 'seven!');
 tree.insert(2, '2!');
-console.log(tree.get(4));
+tree.remove(4);
+tree.insert(9, 'nuevo!');
+tree.insert(6, 'six!');
+tree.remove(7);
+// console.log(tree.remove(4));
 console.log(tree);
