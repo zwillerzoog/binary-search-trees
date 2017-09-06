@@ -10,31 +10,51 @@ class BinaryTree {
     this.left = null;
     this.right = null;
   }
-  
+
   insert(key, value) {
     if (this.key === null) {
       this.key = key;
       this.value = value;
     } else if (key < this.key) {
-        if (this.left == null) {
-            this.left = new BinaryTree(key, value, this)
-        } else {
-            this.left.insert(key, value)
-        }
+      if (this.left == null) {
+        this.left = new BinaryTree(key, value, this);
+      } else {
+        this.left.insert(key, value);
+      }
     } else {
-        if (this.right === null) {
-            this.right = new BinaryTree(key, value, this);
-        } else if (key > this.key) {
-            this.right.insert(key, value);
+      if (this.right === null) {
+        this.right = new BinaryTree(key, value, this);
+      } else if (key > this.key) {
+        this.right.insert(key, value);
+      }
+    }
+  }
+
+  get(key) {
+    if (key === this.key) {
+    //   console.log('first stop', key);
+      return this.value;
         }
+    else if (key < this.key && this.left) {
+      return this.left.get(key);
+    //   console.log('next stop');
+    }
+    else if (key > this.key && this.right) {
+      return this.right.get(key);
+    //   console.log('second stop', key);
+    //   console.log('third stop', this.key);
+    }
+    else {
+      throw new Error('Key Error');
     }
   }
 }
 
 let tree = new BinaryTree();
 
-tree.insert(3, 'treees')
-tree.insert(4, 'four!')
-tree.insert(7, 'seven!')
+tree.insert(3, 'treees');
+tree.insert(4, 'four!');
+tree.insert(7, 'seven!');
 tree.insert(2, '2!');
+console.log(tree.get(4));
 console.log(tree);
