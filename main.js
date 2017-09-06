@@ -1,6 +1,6 @@
 'use strict';
 
-console.log('hiee');
+// console.log('hiee');
 
 class BinaryTree {
   constructor(key = null, value = null, parent = null) {
@@ -58,13 +58,13 @@ class BinaryTree {
         successcor.remove(successcor.key);
       }
       else if (this.left) {
-          this._replaceWith(this.left);
+        this._replaceWith(this.left);
       }
       else if (this.right) {
-          this._replaceWith(this.right);
+        this._replaceWith(this.right);
       }
       else {
-          this._replaceWith (null)
+        this._replaceWith (null);
       }
     }
     else if (key < this.key && this.left) {
@@ -80,50 +80,90 @@ class BinaryTree {
 
   _replaceWith(node) {
     if (this.parent) {
-        if (this == this.parent.left) {     //need help understanding where each node goes
-            this.parent.left = node;
-        } else if (this == this.parent.right) {
-            this.parent.right = node; 
-        }
+      if (this == this.parent.left) {     //need help understanding where each node goes
+        this.parent.left = node;
+      } else if (this == this.parent.right) {
+        this.parent.right = node; 
+      }
 
-        if (node) {
-            this.parent = node.parent;
-        }
+      if (node) {
+        this.parent = node.parent;
+      }
     }
     else {
-        if (node) {
-            this.key = node.key;
-            this.value = node.value;
-            this.left = node.left;
-            this.right = node.right;
-        } else {
-            this.key = null;
-            this.value = null;
-            this.left = null;
-            this.right = null;
-        }
+      if (node) {
+        this.key = node.key;
+        this.value = node.value;
+        this.left = node.left;
+        this.right = node.right;
+      } else {
+        this.key = null;
+        this.value = null;
+        this.left = null;
+        this.right = null;
+      }
     }
   }
 
   _findMin(key) {
-      if (!this.left) {
-          return this;
-      } else {
-          return this.left._findMin()
-      }
+    if (!this.left) {
+      return this;
+    } else {
+      return this.left._findMin();
+    }
+  }
+
+  findHeight(node){
+    let i = 0;
+    while (node !== null) {
+      console.log (node);
+    }
+    //how many nodes there are
+    //we need to know how many steps to the bottom 
+    //need to locate the root
   }
 
 }
 
-let tree = new BinaryTree();
+//writing an algorithm to find the height of the binary search tree
 
-tree.insert(3, 'treees');
-tree.insert(4, 'four!');
-tree.insert(7, 'seven!');
-tree.insert(2, '2!');
-tree.remove(4);
-tree.insert(9, 'nuevo!');
-tree.insert(6, 'six!');
-tree.remove(7);
+
+
+
+// let tree = new BinaryTree();
+
+// tree.insert(3, 'treees');
+// tree.insert(4, 'four!');
+// tree.insert(7, 'seven!');
+// tree.insert(2, '2!');
+// tree.remove(4);
+// tree.insert(9, 'nuevo!');
+// tree.insert(6, 'six!');
+// tree.remove(7);
 // console.log(tree.remove(4));
-console.log(tree);
+// console.log(tree);
+
+
+
+let bst = new BinaryTree();
+
+// bst.insert(4,'number four');
+bst.insert('E', 'The first letter');
+bst.insert('A', 'The first letter to the left');
+bst.insert('S', 'The first letter to the right');
+bst.insert('Y', 'The second letter to the right');
+bst.insert('Q', 'it is Q');
+bst.insert('U', 'it is U');
+bst.findHeight(bst);
+
+
+
+
+// Draw a BST that results when you insert the keys - E A S Y Q U E S T I O N
+// Implement a BST and compare your result
+console.log(bst);
+
+
+// module.exports = BinaryTree;
+
+
